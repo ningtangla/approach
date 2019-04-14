@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-import GenerateModel as gm
 import pygame as pg
 import itertools as it
 import random 

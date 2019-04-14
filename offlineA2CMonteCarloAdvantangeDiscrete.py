@@ -3,7 +3,6 @@ import numpy as np
 import functools as ft
 import env
 import reward
-import dataSave 
 import tensorflow_probability as tfp
 import random
 import agentsEnv as ag
@@ -142,7 +141,7 @@ class OfflineAdvantageActorCritic():
             advantages = estimateAdvantage(episode, critic)
             policyLoss, actorModel = trainActor(episode, advantages, actorModel)
             print(np.mean([len(trajectory) for trajectory in episode]))
-            if episodeIndex %1 = -1:
+            if episodeIndex %1 == -1:
                 for timeStep in episode[-1]:
                     self.render(timeStep[0])
         return actorModel, criticModel
@@ -254,7 +253,7 @@ def main():
     screenColor = [255,255,255]
     circleColorList = [[50,255,50],[50,50,50],[50,50,50],[50,50,50],[50,50,50],[50,50,50],[50,50,50],[50,50,50],[50,50,50]]
     circleSize = 8
-    saveImage = True
+    saveImage = False
     saveImageFile = 'image'
     render = env.Render(numAgent, numOneAgentState, positionIndex, screen, screenColor, circleColorList, circleSize, saveImage, saveImageFile)
 
