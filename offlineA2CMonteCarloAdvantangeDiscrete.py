@@ -132,7 +132,7 @@ class OfflineAdvantageActorCritic():
         self.maxEpisode = maxEpisode
         self.render = render
 
-    def __call__(self, actorModel, criticModel, approximatePolicy, sampleTrajectory, rewardFunction, trainCritic, approximateValue, estimateAdvantage, trainActor):
+    def __call__(self, actorModel, criticModel, approximatePolicy, sampleTrajectory, trainCritic, approximateValue, estimateAdvantage, trainActor):
         for episodeIndex in range(self.maxEpisode):
             actor = lambda state: approximatePolicy(state, actorModel)
             episode = [sampleTrajectory(actor) for trajectoryIndex in range(self.numTrajectory)]
@@ -275,7 +275,7 @@ def main():
     maxEpisode = 602
     actorCritic = OfflineAdvantageActorCritic(numTrajectory, maxEpisode, render)
 
-    trainedActorModel, trainedCriticModel = actorCritic(actorModel, criticModel, approximatePolicy, sampleTrajectory, rewardFunction, trainCritic,
+    trainedActorModel, trainedCriticModel = actorCritic(actorModel, criticModel, approximatePolicy, sampleTrajectory, trainCritic,
             approximateValue, estimateAdvantage, trainActor)
 
     savePathActor = 'data/tmpModelActor.ckpt'
