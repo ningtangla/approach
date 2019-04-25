@@ -2,24 +2,22 @@ import numpy as np
 import AnalyticGeometryFunctions as ag
 
 class SheepPositionReset():
-    def __init__(self, initSheepPosition, initSheepPositionNoise, checkBoundaryAndAdjust):
+    def __init__(self, initSheepPosition, initSheepPositionNoise):
         self.initSheepPosition = initSheepPosition
-        self.initSheepPositionNoise = initSheepPositionNoise
-        self.checkBoundaryAndAdjust = checkBoundaryAndAdjust
+        self.initSheepPositionNoiseLow, self.initSheepPositionNoiseHigh = initSheepPositionNoise
     def __call__(self):
-        startSheepPosition = self.initSheepPosition + np.random.uniform(-self.initSheepPositionNoise, self.initSheepPositionNoise)
-        checkedPosition, toWallDistance = self.checkBoundaryAndAdjust(startSheepPosition)
-        return checkedPosition
+        noise = [np.random.uniform(self.initSheepPositionNoiseLow, self.initSheepPositionNoiseHigh) * np.random.choice([-1, 1]) for dim in range(len(self.initSheepPosition))]
+        startSheepPosition = self.initSheepPosition + np.array(noise)
+        return startSheepPosition
 
 class WolfPositionReset():
-    def __init__(self, initWolfPosition, initWolfPositionNoise, checkBoundaryAndAdjust):
+    def __init__(self, initWolfPosition, initWolfPositionNoise):
         self.initWolfPosition = initWolfPosition
-        self.initWolfPositionNoise = initWolfPositionNoise
-        self.checkBoundaryAndAdjust = checkBoundaryAndAdjust
+        self.initWolfPositionNoiseLow, self.initWolfPositionNoiseHigh = initWolfPositionNoise
     def __call__(self):
-        startWolfPosition = self.initWolfPosition + np.random.uniform(-self.initWolfPositionNoise, self.initWolfPositionNoise)
-        checkedPosition, toWallDistance = self.checkBoundaryAndAdjust(startWolfPosition)
-        return checkedPosition
+        noise = [np.random.uniform(self.initWolfPositionNoiseLow, self.initWolfPositionNoiseHigh) * np.random.choice([-1, 1]) for dim in range(len(self.initWolfPosition))]
+        startWolfPosition = self.initWolfPosition + np.array(noise)
+        return startWolfPosition
 
 class SheepPositionTransition():
     def __init__(self, numOneAgentState, positionIndex, checkBoundaryAndAdjust):

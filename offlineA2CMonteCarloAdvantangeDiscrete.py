@@ -5,7 +5,7 @@ import env
 import reward
 import tensorflow_probability as tfp
 import random
-import agentsEnv as ag
+import agentsMotionSimulation as ag
 import itertools as it
 import pygame as pg
 
@@ -141,7 +141,7 @@ class OfflineAdvantageActorCritic():
             advantages = estimateAdvantage(episode, critic)
             policyLoss, actorModel = trainActor(episode, advantages, actorModel)
             print(np.mean([len(trajectory) for trajectory in episode]))
-            if episodeIndex %1 == -1:
+            if episodeIndex %1 == 0:
                 for timeStep in episode[-1]:
                     self.render(timeStep[0])
         return actorModel, criticModel
@@ -231,10 +231,10 @@ def main():
     initWolfPosition = np.array([180, 180])
     initSheepVelocity = np.array([0, 0])
     initWolfVelocity = np.array([0, 0])
-    initSheepPositionNoise = np.array([120, 120])
-    initWolfPositionNoise = np.array([60, 60])
-    sheepPositionReset = ag.SheepPositionReset(initSheepPosition, initSheepPositionNoise, checkBoundaryAndAdjust)
-    wolfPositionReset = ag.WolfPositionReset(initWolfPosition, initWolfPositionNoise, checkBoundaryAndAdjust)
+    initSheepPositionNoise = np.array([60, 120])
+    initWolfPositionNoise = np.array([0, 60])
+    sheepPositionReset = ag.SheepPositionReset(initSheepPosition, initSheepPositionNoise)
+    wolfPositionReset = ag.WolfPositionReset(initWolfPosition, initWolfPositionNoise)
     
     numOneAgentState = 2
     positionIndex = [0, 1]
