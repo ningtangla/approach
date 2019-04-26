@@ -16,7 +16,7 @@ def main():
     initWolfPosition = np.array([180, 180])
     initSheepVelocity = np.array([0, 0])
     initWolfVelocity = np.array([0, 0])
-    initSheepPositionNoise = np.array([60, 120])
+    initSheepPositionNoise = np.array([90, 150])
     initWolfPositionNoise = np.array([0, 60])
     sheepPositionReset = ag.SheepPositionReset(initSheepPosition, initSheepPositionNoise)
     wolfPositionReset = ag.WolfPositionReset(initWolfPosition, initWolfPositionNoise)
