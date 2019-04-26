@@ -1,3 +1,11 @@
+
+import numpy as np
+import pygame as pg
+
+import agentsMotionSimulation as ag
+import env
+import reward
+
 def main():
 
     actionSpace = [[10,0],[7,7],[0,10],[-7,7],[-10,0],[-7,-7],[0,-10],[7,-7]]
