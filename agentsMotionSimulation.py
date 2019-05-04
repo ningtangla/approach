@@ -27,7 +27,7 @@ class SheepPositionTransition():
     def __call__(self, oldAllAgentState, sheepId, sheepAction):
         oldSheepState = oldAllAgentState[self.numOneAgentState * sheepId : self.numOneAgentState * (sheepId + 1)]
         oldSheepPosition = oldSheepState[min(self.positionIndex) : max(self.positionIndex) + 1] 
-        newSheepVelocity = sheepAction
+        newSheepVelocity = np.array(sheepAction)
         newSheepPosition = oldSheepPosition + newSheepVelocity
         checkedPosition, toWallDistance = self.checkBoundaryAndAdjust(newSheepPosition)
         return checkedPosition
@@ -40,7 +40,7 @@ class WolfPositionTransition():
     def __call__(self, oldAllAgentState, wolfId):
         oldWolfState = oldAllAgentState[self.numOneAgentState * wolfId : self.numOneAgentState * (wolfId + 1)]
         oldWolfPosition = oldWolfState[min(self.positionIndex) : max(self.positionIndex) + 1] 
-        newWolfPosition = oldWolfPosition
+        newWolfPosition = np.array(oldWolfPosition)
         checkedPosition, toWallDistance = self.checkBoundaryAndAdjust(newWolfPosition)
         return checkedPosition
 
